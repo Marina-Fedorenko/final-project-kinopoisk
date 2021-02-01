@@ -1,0 +1,91 @@
+создание таблиц:
+create database kinopoisk;
+CREATE TABLE actors (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки", 
+  first_name VARCHAR(100) NOT NULL COMMENT "Имя актера",
+  last_name VARCHAR(100) NOT NULL COMMENT "Фамилия актера",
+  gender CHAR(1) NOT NULL COMMENT "Пол",
+  birthday DATE COMMENT "Дата рождения",
+  city VARCHAR(130) COMMENT "Город проживания",
+  country VARCHAR(130) COMMENT "Страна проживания",
+  total_films VARCHAR(1000) NOT null COMMENT "Количество фильмов",
+  awards VARCHAR(100) NOT NULL COMMENT "Награды",
+  photo VARCHAR(100) NOT NULL COMMENT "Количество фотографий",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Актеры"; 
+
+
+create table films (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+film_name VARCHAR(100) NOT NULL COMMENT "Название",
+genre VARCHAR(100) NOT NULL COMMENT "Жанр",
+description TEXT NOT NULL COMMENT "Описание",
+actors VARCHAR(100) NOT NULL COMMENT "Актеры",
+raiting VARCHAR(100) NOT NULL COMMENT "Рейтинг",
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+  ) COMMENT "Фильмы";
+ 
+ create table film_genres (
+ id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+  name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название жанра",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Жанры фильмов";
+create table award_types (
+ id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+  name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название награды",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Награды";
+
+create table photos (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+  user_id INT UNSIGNED NOT NULL COMMENT "Ссылка на актера",
+  filename VARCHAR(255) NOT NULL COMMENT "Путь к файлу",
+  size INT NOT NULL COMMENT "Размер файла",
+  metadata JSON COMMENT "Метаданные файла",
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Фотографии";
+
+create table series (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+film_name VARCHAR(100) NOT NULL COMMENT "Название",
+genre VARCHAR(100) NOT NULL COMMENT "Жанр",
+description TEXT NOT NULL COMMENT "Описание",
+actors VARCHAR(100) NOT NULL COMMENT "Актеры",
+raiting VARCHAR(100) NOT NULL COMMENT "Рейтинг",
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+  ) COMMENT "Сериалы";
+  
+ create table online_content (
+ id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+ content_type_id INT UNSIGNED NOT NULL COMMENT "Тип контента",
+ people_watching_now VARCHAR(100) NOT NULL COMMENT "Сколько людей сейчас смотрят"
+ ) COMMENT "Онлайн ресурсы";
+ 
+create table content_types (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+  name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название типа",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Типы контента";
+
+create table actor_materials ( 
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+actor_id INT UNSIGNED NOT NULL COMMENT "Ссылка на актера",
+material_type_id INT UNSIGNED NOT NULL COMMENT "Ссылка на тип материала",
+body TEXT NOT NULL COMMENT "Краткое описание",
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Материалы по актеру";
+
+create table material_types (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+  name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название типа",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+) COMMENT "Типы материалов";
