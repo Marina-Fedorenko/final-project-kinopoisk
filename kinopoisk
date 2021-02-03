@@ -1,5 +1,5 @@
 создание таблиц:
-create database kinopoisk;
+create database kinipoisk;
 CREATE TABLE actors (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки", 
   first_name VARCHAR(100) NOT NULL COMMENT "Имя актера",
@@ -9,7 +9,7 @@ CREATE TABLE actors (
   city VARCHAR(130) COMMENT "Город проживания",
   country VARCHAR(130) COMMENT "Страна проживания",
   total_films VARCHAR(1000) NOT null COMMENT "Количество фильмов",
-  awards VARCHAR(100) NOT NULL COMMENT "Награды",
+  award_type_id INT UNSIGNED NOT NULL COMMENT "Награды",
   photo VARCHAR(100) NOT NULL COMMENT "Количество фотографий",
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
@@ -19,14 +19,15 @@ CREATE TABLE actors (
 create table films (
 id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
 film_name VARCHAR(100) NOT NULL COMMENT "Название",
-genre VARCHAR(100) NOT NULL COMMENT "Жанр",
+genre_id INT UNSIGNED NOT NULL COMMENT "Жанр",
 description TEXT NOT NULL COMMENT "Описание",
-actors VARCHAR(100) NOT NULL COMMENT "Актеры",
+actor_id INT UNSIGNED NOT NULL COMMENT "Ссылка на актера",
 raiting VARCHAR(100) NOT NULL COMMENT "Рейтинг",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
   ) COMMENT "Фильмы";
- 
+
+
  create table film_genres (
  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
   name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название жанра",
@@ -53,14 +54,15 @@ id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентифик�
 create table series (
 id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
 film_name VARCHAR(100) NOT NULL COMMENT "Название",
-genre VARCHAR(100) NOT NULL COMMENT "Жанр",
+genre_id INT UNSIGNED NOT NULL COMMENT "Жанр",
 description TEXT NOT NULL COMMENT "Описание",
-actors VARCHAR(100) NOT NULL COMMENT "Актеры",
+actor_id INT UNSIGNED NOT NULL COMMENT "Ссылка на актера",
 raiting VARCHAR(100) NOT NULL COMMENT "Рейтинг",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",  
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
   ) COMMENT "Сериалы";
   
+ 
  create table online_content (
  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
  content_type_id INT UNSIGNED NOT NULL COMMENT "Тип контента",
