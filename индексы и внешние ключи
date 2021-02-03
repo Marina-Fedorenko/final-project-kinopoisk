@@ -1,0 +1,48 @@
+ALTER TABLE actor_materials
+  ADD CONSTRAINT actor_materials_actor_id_fk 
+    FOREIGN KEY (actor_id) REFERENCES actors(id)
+      ON DELETE CASCADE;
+ ALTER TABLE actor_materials
+  ADD CONSTRAINT actor_materials_material_type_id_fk 
+    FOREIGN KEY (material_type_id) REFERENCES material_types(id)
+      ON DELETE CASCADE; 
+ALTER table films
+ADD constraint films_genre_id_fk
+FOREIGN key (genre_id) references film_genres(id)
+ON DELETE CASCADE; 
+ALTER table films
+ADD constraint films_actor_id_fk
+FOREIGN key (actor_id) references actors(id)
+ON DELETE CASCADE;   
+ ALTER table online_content
+ADD constraint online_content_content_type_id_fk
+FOREIGN key (content_type_id) references content_types(id)
+ON DELETE CASCADE;     
+ALTER table photos
+ADD constraint photos_user_id_fk
+FOREIGN key (user_id) references actors(id)
+ON DELETE CASCADE;
+ALTER table series
+ADD constraint series_genre_id_fk
+FOREIGN key (genre_id) references film_genres(id)
+ON DELETE CASCADE;
+ALTER table series
+ADD constraint series_actor_id_fk
+FOREIGN key (actor_id) references actors(id)
+ON DELETE CASCADE;
+ALTER table actors
+ADD constraint actors_award_type_id_fk
+FOREIGN key (award_type_id) references award_types(id)
+ON DELETE CASCADE;
+
+CREATE INDEX actors_first_name_last_name_idx ON actors(first_name, last_name);
+create index award_types_name_idx on award_types(name);
+create index content_types_name_idx on content_types(name);
+create index film_genres_name_idx on film_genres(name); 
+create index films_film_name_idx on films(film_name);
+create index films_raiting_idx on films(raiting);
+ create index photos_user_id_idx on photos(user_id);
+ create index series_film_name_idx on series(film_name);
+ create index series_genre_id_idx on series(genre_id);
+ create index series_actor_id_idx on series(actor_id);
+ create index series_raiting_idx on series(raiting);
