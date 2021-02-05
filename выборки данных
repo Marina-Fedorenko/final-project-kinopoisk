@@ -1,0 +1,39 @@
+Выбираем 10 актеров, с наибольшим объемом загурженных фото:
+SELECT user_id, SUM(size) AS total
+FROM photos
+GROUP BY user_id
+HAVING total > 100000
+ORDER BY total DESC
+limit 10;
+
+Выбираем 10 фильмов с самым высоким рейтингом:
+SELECT film_name, raiting 
+FROM films
+ORDER BY raiting desc
+limit 10;
+
+выбираем сколько мужчин и женщин играет в фильмах:
+SELECT
+	(SELECT gender FROM actors WHERE id = films.id) AS gender,
+	COUNT(*) AS total
+    FROM films
+    GROUP BY gender
+    ORDER BY total desc;
+    
+выбираем 10 самых рейтинговых сериалов с жанрами:
+SELECT series.id, film_name, genre_id, raiting
+  FROM series
+    LEFT JOIN film_genres 
+      ON series.id = film_genres.id
+      GROUP BY series.id
+  ORDER BY raiting DESC
+  LIMIT 10;
+  
+  выбираем 10 актеров, сыгравших в большем количестве фильмов и выводим названия фильмов:
+  SELECT first_name, last_name, total_films, film_name
+  FROM actors
+    LEFT JOIN films 
+      ON actors.id = films.actor_id
+      GROUP BY actors.id
+  ORDER BY raiting DESC
+  LIMIT 10;
