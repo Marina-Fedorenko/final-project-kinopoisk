@@ -1,0 +1,11 @@
+представление о всех актерах, отсортированное по их дате рождения:
+create view actors_data (name, last_name, birthday)
+as select first_name, last_name, birthday from actors
+order by birthday;
+
+представление о фильмах в жанре комедия, отсортированное по рейтингу:
+create view comedy as
+select film_name, description, raiting, genre_id
+from films
+where genre_id = 5
+order by raiting desc;
