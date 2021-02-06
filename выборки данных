@@ -29,11 +29,26 @@ SELECT series.id, film_name, genre_id, raiting
   ORDER BY raiting DESC
   LIMIT 10;
   
-  выбираем 10 актеров, сыгравших в большем количестве фильмов и выводим названия фильмов:
-  SELECT first_name, last_name, total_films, film_name
+  выбираем 10 актеров, сыгравших в большем количестве фильмов и выводим названия фильмов и их жанры:
+ SELECT first_name, last_name, total_films, film_name, name as genre
   FROM actors
     LEFT JOIN films 
       ON actors.id = films.actor_id
+      left join film_genres
+      on films.genre_id = film_genres.id
       GROUP BY actors.id
   ORDER BY raiting DESC
   LIMIT 10;
+  
+  выбираем все сериалы и фильмы, в которых снимался актер, с наградами: (тут у меня дублируется информация, select distinct не помог)
+  select distinct actors.first_name, actors.last_name, films.film_name as film, films.raiting as film_raiting, series.film_name as series, 
+ series.raiting as series_raiting, award_types.name as award
+from actors 
+left join films
+  on actors.id = films.actor_id
+    left join series 
+      ON actors.id = series.actor_id
+      join award_types
+      on actors.award_type_id = award_types.id 
+ where actors.id = 10;
+  
